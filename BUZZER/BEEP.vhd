@@ -13,13 +13,13 @@ signal count:integer range 0 to 31;--change
 signal clk2:std_logic;
 begin
 	process(clk_50m)  --对12mhz系统时钟进行3m的分频，得到4hz的信号clk2
-	variable count:integer range 0 to 10000000;
+	variable count:integer range 0 to 20000000;
 	begin
 		if clk_50m'event and clk_50m ='1' then
 			count:=count+1;
-			if count=5000000 then
+			if count=10000000 then
 				clk2<='1';                 
-			elsif count=10000000 then
+			elsif count=20000000 then
 				clk2<='0';
 				count:=0;
 			end if;
@@ -35,7 +35,7 @@ begin
 				count<=count+1;
 			end if;
 		end if;
-	end process;
+	end process ;
 	
 	process(count,tone_key)      
 	begin
