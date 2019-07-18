@@ -1,0 +1,54 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+entity SPEAKER is
+	port(
+			clk1: in std_logic;                        --系统时钟12mhz
+			TONE1: in integer range 0 to 2047;            --音符分频系数
+			spks: out std_logic                        --驱动扬声器的音频信号
+		);
+end SPEAKER;
+architecture SPEAKER_ARCH of SPEAKER is
+signal  preclk, fullspks:std_logic;
+begin
+	p1:process(clk1)--此进程对系统时钟进行16分频
+	variable count: integer range 0 to 16;
+	begin
+		if clk1'event and clk1='1' then count:=count+1;
+			if count=8 then
+				preclk<='1';  
+			elsif count=16 then
+				preclk<='0';
+				count:=0;
+			end if; 
+		end if;
+	end process p1;
+	
+	p2:process(preclk,TONE1)--对0.75mhz的脉冲再次分频，得到所需要的音符频率
+	variable count11:integer range 0 to 2047;
+	begin
+		if preclk'event and preclk='1' then
+		   if count11<TONE1 then
+				count11:=count11+1;
+				fullspks<='1'; 
+		   else
+				count11:=0;
+				fullspks<='0';
+		   end if;
+		end if;
+	end process p2;
+	
+	p3:process(fullspks)--此进程对fullspks进行2分频
+	variable count2: std_logic:='0';
+	begin
+	if fullspks'event and fullspks='1' then
+		count2:=not count2;
+		if count2='1' then
+			spks<='1';
+		else
+			spks<='0';
+	   end if;
+	end if;
+	end process p3;
+end behavioral;

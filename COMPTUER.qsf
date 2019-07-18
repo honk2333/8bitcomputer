@@ -49,9 +49,6 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR "C:/Users/Honk/Desktop/sources/Altera/COMPUTER/COMPUTER/simulation/qsim/" -section_id eda_simulation
@@ -84,6 +81,11 @@ set_global_assignment -name VHDL_FILE DR/DR.vhd
 set_global_assignment -name VHDL_FILE CTRL/CTRL.vhd
 set_global_assignment -name VHDL_FILE CLK/CLK.vhd
 set_global_assignment -name VHDL_FILE ALU/ALU.vhd
-set_global_assignment -name VHDL_FILE BUZZER/BUZZER.vhd
-set_location_assignment PIN_110 -to buzzer
+set_global_assignment -name VHDL_FILE BUZZER/BEEP.vhd
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_110 -to BEEP
+set_global_assignment -name VHDL_FILE BUZZER/TONE.vhd
+set_global_assignment -name VHDL_FILE BUZZER/SPEAKER.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
