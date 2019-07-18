@@ -35,7 +35,7 @@ begin
 				count<=count+1;
 			end if;
 		end if;
-	end process p2;
+	end process;
 	
 	process(count,tone_key)      
 	begin
