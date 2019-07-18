@@ -23,14 +23,47 @@ begin
 	--	end if;
 	--end process;
 	--ram_out <= mem(to_integer(unsigned(addr))) when wr = '1' else "ZZZZZZZZ";	-- wr信号为1时把读取的地址上的数据发送到输出端口
-		ram_out <= "00000001" when addr = "0000" else					-- mov ax 8
-			        "00001000" when addr = "0001" else
+	
+--与、或操作测试
+--		ram_out <= "00000001" when addr = "0000" else					-- mov ax 8
+--			        "00001000" when addr = "0001" else
+--				     "00000010" when addr = "0010" else					-- mov bx 3
+--			        "00000011" when addr = "0011" else
+--				     "00010101" when addr = "0100" else 					-- add ax bx
+--				     "10000000" when addr = "0101" else 					-- shr ax
+--					  "00010100" when addr = "0110" else               -- xchg ax bx
+--					  "00000001" when addr = "0111" else 
+--				     "00001110" when addr = "1000" else 					-- halt
+--				     "ZZZZZZZZ";
+
+--加法、移位操作测试，符号位的测试
+--		ram_out <="00000001" when addr = "0000" else					-- mov ax 8
+--			        "00000111" when addr = "0001" else
+--				     "00000010" when addr = "0010" else					-- mov bx 3
+--			        "00001000" when addr = "0011" else
+--				     "00000111" when addr = "0100" else 					-- add ax bx
+--				     "00001001" when addr = "0101" else 					-- shr ax
+--				     "00001110" when addr = "1000" else 					-- halt
+--				     "ZZZZZZZZ";
+
+--减法、取非测试
+--	ram_out <= "00000001" when addr = "0000" else					-- mov ax 8
+--			        "00001000" when addr = "0001" else
+--				     "00000010" when addr = "0010" else					-- mov bx 3
+--			        "00000011" when addr = "0011" else
+--				     "00010001" when addr = "0100" else 					-- add ax bx
+--				     "00011000" when addr = "0101" else 					-- shr ax
+--				     "00001110" when addr = "1000" else 					-- halt
+--				     "ZZZZZZZZ";
+
+--加法，移位、交换测试
+	ram_out <= "00000001" when addr = "0000" else					-- mov ax 8
+			        "00000110" when addr = "0001" else
 				     "00000010" when addr = "0010" else					-- mov bx 3
-			        "00000011" when addr = "0011" else
-				     "00010101" when addr = "0100" else 					-- add ax bx
-				     "10000000" when addr = "0101" else 					-- shr ax
-					  "00010100" when addr = "0110" else               -- xchg ax bx
-					  "00000001" when addr = "0111" else 
+			        "00001000" when addr = "0011" else
+				     "00000111" when addr = "0100" else 					-- add ax bx
+				     "00001001" when addr = "0101" else 					-- shr ax
+					  "00001101" when addr=  "0110" else
 				     "00001110" when addr = "1000" else 					-- halt
 				     "ZZZZZZZZ";
 end RAM_arch;
